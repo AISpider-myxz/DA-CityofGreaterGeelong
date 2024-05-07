@@ -106,27 +106,37 @@ class GeelongaustraliaSpider(scrapy.Spider):
                 item['app_num'] = temp_list[0]
                 item['vic_smart'] = temp_list[1]
 
-                lodged_date = temp_list[2]
-                item['lodge_date'] = datetime.strptime(lodged_date, '%d/%m/%Y') if lodged_date else 0   
+                lodged_date = temp_list[2].strip()
+                time_array = time.strptime(lodged_date, '%d/%m/%Y')
+                temp_data = int(time.mktime(time_array))
+                item['lodge_date'] = temp_data if lodged_date else 0   
 
                 item['address'] = temp_list[3]
                 item['description'] = temp_list[4]
                 item['changes_'] = temp_list[5]
                 item['type_'] = temp_list[6]
 
-                lodged_date = temp_list[7]
-                item['notice_date'] = datetime.strptime(lodged_date, '%d/%m/%Y') if lodged_date else 0  
+                lodged_date = temp_list[7].strip()
+                time_array = time.strptime(lodged_date, '%d/%m/%Y')
+                temp_data = int(time.mktime(time_array))
+                item['notice_date'] = temp_data if lodged_date else 0  
+
                 item['authority'] = temp_list[8]
 
-                lodged_date = temp_list[9]
-                item['decision_date'] = datetime.strptime(lodged_date, '%d/%m/%Y') if lodged_date else 0  
+                lodged_date = temp_list[9].strip()
+                time_array = time.strptime(lodged_date, '%d/%m/%Y')
+                temp_data = int(time.mktime(time_array))
+                item['decision_date'] = temp_data if lodged_date else 0  
                 item['decision'] = temp_list[10]
 
                 item['vc_refno'] = temp_list[11]
                 item['vc_decision'] = temp_list[12]
 
-                lodged_date = temp_list[13]
-                item['vc_date'] = datetime.strptime(lodged_date, '%d/%m/%Y') if lodged_date else 0  
+                lodged_date = temp_list[13].strip()
+                time_array = time.strptime(lodged_date, '%d/%m/%Y')
+                temp_data = int(time.mktime(time_array))
+                item['vc_date'] = temp_data if lodged_date else 0  
+                
                 item['metadata']={}
                 del item['metadata']
                 yield item
